@@ -138,7 +138,7 @@ variable "function_app" {
   default = {
     name = "poc-serverless-func"
     application_stack = {
-      python_version = "3.9"
+      python_version = "3.7"
     }
   }
 }

@@ -1,0 +1,12 @@
+{
+  "scriptFile": "__init__.py",
+  "bindings": [
+    {
+      "name": "msg",
+      "type": "serviceBusTrigger",
+      "direction": "in",
+      "queueName": "poc-sbq-serverless",
+      "connection": "SERVICEBUS_SENDER_CONNECTION"
+    }
+  ]
+}

@@ -1,0 +1,42 @@
+{
+  "version": "2.0",
+  "aggregator": {
+    "batchSize": 1000,
+    "flushTimeout": "00:01:00"
+  },
+  "logging": {
+    "fileLoggingMode": "debugOnly",
+    "logLevel": {
+        "default": "Error",
+        "Host.Results": "Information",
+        "Host.Aggregator": "Information",
+        "Function.http.User": "Debug",
+        "Function.queue.User": "Debug"
+    },
+    "applicationInsights": {
+      "samplingSettings": {
+        "isEnabled": true,
+        "excludedTypes": "Request;Exception"
+      },
+      "enableLiveMetrics": false,
+      "enableDependencyTracking": false,
+      "enablePerformanceCountersCollection": false
+    }
+  },
+  "healthMonitor": {
+    "enabled": true,
+    "healthCheckInterval": "00:00:10",
+    "healthCheckWindow": "00:02:00",
+    "healthCheckThreshold": 6,
+    "counterThreshold": 0.80
+  },
+  "extensions": {
+    "serviceBus": {
+      "maxConcurrentCalls": 32
+    }
+  },
+  "extensionBundle": {
+    "id": "Microsoft.Azure.Functions.ExtensionBundle",
+    "version": "[3.*, 4.0.0)"
+  }
+}
