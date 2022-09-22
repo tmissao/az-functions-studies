@@ -6,13 +6,6 @@ locals {
       resource_group = var.resource_group.name
     }
   )
-  # https://learn.microsoft.com/en-us/azure/azure-functions/functions-reference?tabs=azurewebjobsstorage#connecting-to-host-storage-with-an-identity-preview
-  host_storage_required_permissions = [
-    "Storage Account Contributor", 
-    "Storage Blob Data Owner", 
-    "Storage Queue Data Contributor", 
-    "Storage Table Data Contributor"
-  ]
   # https://learn.microsoft.com/en-us/azure/azure-functions/functions-reference?tabs=servicebus#connecting-to-host-storage-with-an-identity-preview
   servicebus_required_permissions = [
     "Azure Service Bus Data Sender", 
@@ -25,14 +18,8 @@ locals {
     for k,v in var.function_app_environments_variables : upper(k) => v
   }
   function_app_identity_connections = {
-    SERVICEBUS_SENDER_CONNECTION__fullyQualifiedNamespace = "${var.service_bus.namespace_name}.servicebus.windows.net"
+    SERVICEBUS_CONNECTION__fullyQualifiedNamespace = "${var.service_bus.namespace_name}.servicebus.windows.net"
   }
-  # function_app_ignore_changes = [
-  #   app_settings["WEBSITE_RUN_FROM_PACKAGE"],
-  #   tags["hidden-link: /app-insights-conn-string"],
-  #   tags["hidden-link: /app-insights-instrumentation-key"],
-  #   tags["hidden-link: /app-insights-resource-id"],
-  # ]
 }
 
 data "azurerm_subscription" "current" {}
@@ -78,14 +65,12 @@ variable "storage_account" {
     account_kind = string,
     account_tier = string,
     account_replication_type = string
-    release_container_name = string
   })
   default = {
     name_prefix = "pocserverlesshost"
     account_kind = "StorageV2"
     account_tier = "Standard"
     account_replication_type = "LRS"
-    release_container_name = "releases"
   }
 }
 

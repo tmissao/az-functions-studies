@@ -36,12 +36,6 @@ resource "azurerm_storage_account" "this" {
   tags = local.tags
 }
 
-resource "azurerm_storage_container" "this" {
-  name                  = var.storage_account.release_container_name
-  storage_account_name  = azurerm_storage_account.this.name
-  container_access_type = "private"
-}
-
 resource "azurerm_service_plan" "this" {
   name                = var.service_plan.name
   location            = azurerm_resource_group.this.location
@@ -77,7 +71,6 @@ resource "azurerm_linux_function_app" "this" {
   storage_account_name       = azurerm_storage_account.this.name
   service_plan_id            = azurerm_service_plan.this.id
   key_vault_reference_identity_id = azurerm_user_assigned_identity.function_app.id
-  # storage_uses_managed_identity = true
   storage_account_access_key = azurerm_storage_account.this.primary_access_key
   site_config {
     application_insights_key = azurerm_application_insights.this.instrumentation_key
@@ -102,6 +95,9 @@ resource "azurerm_linux_function_app" "this" {
   lifecycle {
     ignore_changes = [
       app_settings["WEBSITE_RUN_FROM_PACKAGE"],
+      tags["hidden-link: /app-insights-conn-string"],
+      tags["hidden-link: /app-insights-instrumentation-key"],
+      tags["hidden-link: /app-insights-resource-id"]
     ]
   }
 }
@@ -118,30 +114,3 @@ resource "azurerm_servicebus_queue" "this" {
   name         = var.service_bus.queue_name
   namespace_id = azurerm_servicebus_namespace.this.id
 }
-
-# resource "null_resource" "deploy" {
-#   triggers = {
-#     SOURCE_DIRECTORY= var.function_app_source_path
-#     SUBSCRIPTION = data.azurerm_subscription.current.subscription_id
-#     RESOURCE_GROUP = azurerm_resource_group.this.name
-#     STORAGE_ACCOUNT_NAME = azurerm_storage_account.this.name
-#     CONTAINER_NAME = azurerm_storage_container.this.name
-#     AZ_FUNCTION_APP_NAME= azurerm_linux_function_app.this.name
-#     dir_sha1 = sha1(join("", [for f in fileset(path.module, "${var.function_app_source_path}/**"): filesha1(f)]))
-#   }
-#   provisioner "local-exec" {
-#     command = "/bin/bash ${path.module}/scripts/deploy.sh"
-#     environment = {
-#       SOURCE_DIRECTORY= var.function_app_source_path
-#       SUBSCRIPTION = data.azurerm_subscription.current.subscription_id
-#       RESOURCE_GROUP = azurerm_resource_group.this.name
-#       STORAGE_ACCOUNT_NAME = azurerm_storage_account.this.name
-#       CONTAINER_NAME = azurerm_storage_container.this.name
-#       AZ_FUNCTION_APP_NAME= azurerm_linux_function_app.this.name
-#     }
-#   }
-#   depends_on = [
-#     azurerm_storage_container.this,
-#     azurerm_linux_function_app.this
-#   ]
-# }

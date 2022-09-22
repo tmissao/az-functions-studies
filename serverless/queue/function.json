@@ -6,7 +6,7 @@
       "type": "serviceBusTrigger",
       "direction": "in",
       "queueName": "poc-sbq-serverless",
-      "connection": "SERVICEBUS_SENDER_CONNECTION"
+      "connection": "SERVICEBUS_CONNECTION"
     }
   ]
 }

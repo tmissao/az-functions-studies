@@ -19,7 +19,7 @@
     {
       "type": "serviceBus",
       "direction": "out",
-      "connection": "SERVICEBUS_SENDER_CONNECTION",
+      "connection": "SERVICEBUS_CONNECTION",
       "name": "sender",
       "queueName": "poc-sbq-serverless"
     }

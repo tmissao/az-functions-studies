@@ -37,6 +37,6 @@ class Response:
           "env1": self.env1,
           "env2": self.env2,
           "secret1": self.secret1,
-          "secret2": self.secret2
+          "secret2": self.secret2,
         }
         return json.dumps(obj)
