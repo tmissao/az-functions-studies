@@ -218,7 +218,7 @@ func new --name mynewfunction --template Azure Blob Storage trigger
 
 3. Configure Log Level as mentioned at `Telemetry & Logs step` at [host.json file](./serverless/host.json)
 ```json
-# 
+# host.json
 {
     "logging": {
       "fileLoggingMode": "debugOnly",
