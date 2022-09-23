@@ -115,7 +115,7 @@ Although if a new function is created it is necessary to include an exception in
                                                        # real function name      
       }
     }
-  }
+}
 ```
 
 ## Local Development
@@ -186,11 +186,70 @@ After that, just execute this command to start your functions locally
 cd serverless
 python -m venv .venv
 source .venv/bin/activate
+pip install -r requirements.txt
 func start
 ```
 ### `Results:`
 
 <img src="./artifacts/demo-locally.gif" width="800">
+
+## Creating New Functions
+---
+
+In order to create new functions using python perform the following steps:
+
+1. Activate the .venv (provides python isolation from SO)
+```bash
+cd serverless
+python -m venv .venv
+source .venv/bin/activate
+
+# deactivate - this command deactivate python .venv isolation
+```
+
+2. Choose a template from the pre-defined az func template to speed up development
+```bash
+func template list # show a list of template for azure functions
+
+# func new --name <function-name> --template <template-name>
+# A new folder under serverless repository with the function name will be created
+func new --name mynewfunction --template Azure Blob Storage trigger
+```
+
+3. Configure Log Level as mentioned at `Telemetry & Logs step` at [host.json file](./serverless/host.json)
+```json
+# 
+{
+    "logging": {
+      "fileLoggingMode": "debugOnly",
+      "logLevel": {
+          "default": "Error",                  
+          "Host.Results": "Information",       
+          "Host.Aggregator": "Information",    
+          "Function.http.User": "Debug",       
+          "Function.queue.User": "Debug",
+          "Function.mynewfunction.User": "Debug"   
+      }
+    }
+}
+```
+
+4. Install Python Desired Dependencies (Optional)
+```bash
+cd serverless
+pip install requests
+```
+
+5. Freeze Python Dependencies
+```bash
+# This is step is very important in order to ensure correctness
+# of the deploy. Otherwise the function will failed when deployed 
+# because it does not have all the required dependencies
+cd serverless
+pip freeze > requirements.txt
+```
+
+6. Add your logic to the function
 
 ## References
 ---
