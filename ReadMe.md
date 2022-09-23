@@ -195,28 +195,28 @@ func start
 ## References
 ---
 
-https://learn.microsoft.com/en-us/azure/azure-functions/functions-app-settings
+- [`Quickstart Azure Functions Python`](https://learn.microsoft.com/en-us/azure/azure-functions/create-first-function-cli-python?tabs=azure-cli%2Cbash%2Cbrowser)
 
-# Install Azure Functions Core Tools
-https://learn.microsoft.com/en-us/azure/azure-functions/functions-run-local?tabs=v4%2Clinux%2Ccsharp%2Cportal%2Cbash#v2
+- [`Azure Functions Python Developer Guide`](https://learn.microsoft.com/en-us/azure/azure-functions/create-first-function-cli-python?tabs=azure-cli%2Cbash%2Cbrowser)
 
-# Install Python 3.9
-https://linuxize.com/post/how-to-install-python-3-9-on-ubuntu-20-04/
-sudo apt-get install python3-venv
+- [`Azure Functions Python SDK Reference`](https://learn.microsoft.com/en-us/python/api/azure-functions/azure.functions?view=azure-python)
 
-# Create Function
-https://learn.microsoft.com/en-us/azure/azure-functions/create-first-function-cli-python?tabs=azure-cli%2Cbash%2Cbrowser
-python -m venv .venv
-source .venv/bin/activate
+- [`Working with Azure Functions Core Tools`](https://learn.microsoft.com/en-us/azure/azure-functions/create-first-function-cli-python?tabs=azure-cli%2Cbash%2Cbrowser)
 
-# deactivate
+- [`Azure Functions Triggers and Bindings`](https://learn.microsoft.com/en-us/azure/azure-functions/functions-triggers-bindings?tabs=python)
 
-func init serverless --python
-func new --name http --template "HTTP trigger" --authlevel "anonymous"
-func new --name queue --template "Azure Service Bus Queue trigger"
+- [`Azure Functions Bindings Expressions Patterns`](https://learn.microsoft.com/en-us/azure/azure-functions/functions-bindings-expressions-patterns)
 
-# Fetch Configuration
-func azure functionapp fetch-app-settings '<function-name>' --output-file local.settings.json
+- [`Azure Functions Identity Based Connection`](https://learn.microsoft.com/en-us/azure/azure-functions/functions-reference?tabs=blob#common-properties-for-identity-based-connections)
 
-# References
-https://learn.microsoft.com/en-us/azure/azure-functions/functions-reference-python?tabs=asgi%2Capplication-level#folder-structure
+- [`Azure Functions Host Storage Identity Based Connections`](https://learn.microsoft.com/en-us/azure/azure-functions/functions-reference?tabs=blob#connecting-to-host-storage-with-an-identity-preview)
+
+- [`Azure Functions Keyvault References`](https://learn.microsoft.com/en-us/azure/app-service/app-service-key-vault-references?tabs=azure-cli#access-vaults-with-a-user-assigned-identity)
+
+- [`Azure Functions Configure Telemetry`](https://docs.microsoft.com/en-us/azure/azure-functions/configure-monitoring?tabs=v2)
+
+- [`Azure Functions Configure Functions - host.json Reference`](https://docs.microsoft.com/en-us/azure/azure-functions/functions-host-json)
+
+- [`External Deploy - Run from Package`](https://learn.microsoft.com/en-us/azure/azure-functions/run-functions-from-deployment-package) 
+
+- [`App Settings Reference`](https://learn.microsoft.com/en-us/azure/azure-functions/functions-app-settings)
